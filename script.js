@@ -21,4 +21,9 @@ addEventListener('pointerdown', (e) => {
     currentStringValue += target.textContent;
     display.textContent = currentStringValue;
   }
+
+  if (target.id === 'clear' && target.nodeName === 'BUTTON') {
+    display.textContent = 0;
+    currentStringValue = ''
+  }
 })
