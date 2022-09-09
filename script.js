@@ -8,12 +8,12 @@ const decimal = document.querySelector('.keypad-container #decimal');
 // to determine if it is a number between the valid range
 
 function isNumber (num) {
-  sequence = new RegExp(/[0-9]/g)
-  return sequence.test(num)
+  sequence = new RegExp(/[0-9]/g);
+  return sequence.test(num);
 }
 
 let decimalActive = false;
-let currentStringValue = '0'
+let currentStringValue = '0';
 
 // Event listeners
 
@@ -25,13 +25,13 @@ addEventListener('pointerdown', (e) => {
       currentStringValue = target.textContent;
       display.textContent = currentStringValue;
     } else if (target.textContent === '0' && currentStringValue === '0') {
-      currentStringValue = '0'
+      currentStringValue = '0';
     } else {
         currentStringValue += target.textContent;
         display.textContent = currentStringValue;
-    }
-  }
-})
+    };
+  };
+});
 
 decimal.addEventListener('pointerdown', () => {
   if (currentStringValue === '0' && decimalActive === false) {
@@ -42,15 +42,15 @@ decimal.addEventListener('pointerdown', () => {
       currentStringValue += '.';
       display.textContent = currentStringValue;
       decimalActive = true;
-  }
-})
+  };
+});
 
 addEventListener('pointerdown', (e) => {
   let target = e.target;
 
   if (target.id === 'clear' && target.nodeName === 'BUTTON') {
     display.textContent = 0;
-    currentStringValue = '0'
+    currentStringValue = '0';
     decimalActive = false;
-  }
-})
+  };
+});
