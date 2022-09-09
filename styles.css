@@ -31,19 +31,33 @@
   padding: 15px;
   background-color: var(--dark-gray);
   font-family: 'Roboto Mono', monospace;
+  border-radius: 5px;
 }
 
 .display-container {
+  display: grid;
+  grid-template-columns: 93% auto;
+  grid-template-rows: 1fr 3fr;
   text-align: right;
   padding: 5px;
   width: 100%;
   height: 20%;
   background-color: rgb(10, 124, 115);
+  border-radius: 5px;
 }
 
 #display {
   color: var(--calc-num-color);
   font-size: 2rem;
+  overflow: hidden;
+}
+
+.display-container #operation {
+  grid-column: 1/3;
+}
+
+.display-container #operator {
+  padding-top: 50%;
 }
 
 .keypad-container {
