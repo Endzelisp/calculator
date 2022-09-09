@@ -8,6 +8,8 @@
 
 :root {
   --dark-gray: rgb(41, 41, 41);
+  --light-gray: rgb(80, 80, 80);
+  --calc-num-color: rgb(235, 235, 235);
 }
 
 .main-container {
@@ -24,8 +26,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 500px;
-  padding-bottom: 5px;
+  padding: 15px;
   background-color: var(--dark-gray);
 }
 
@@ -34,21 +35,20 @@
   justify-content: flex-end;
   align-items: flex-end;
   padding: 5px;
-  width: 280px;
-  height: 50px;
+  width: 100%;
+  height: 15%;
   background-color: rgb(23, 59, 23);
-  margin: 10px auto;
 }
 
 #display {
-  color: white;
+  color: var(--calc-num-color);
   font-size: 1.5rem;
 }
 
 .keypad-container {
-  display: flex;
-  width: 280px;
-  height: 250px;
-  background-color: aliceblue;
+  display: grid;
+  width: 100%;
+  height: 70%;
+  background-color: var(--light-gray);
   
 }
