@@ -58,12 +58,12 @@
   height: 70%;
 }
 
-.keypad-container div {
+.keypad-container button {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgb(155, 57, 0);
-  outline: 3px solid rgb(219, 80, 0);
+  border: 3px solid rgb(219, 80, 0);
 }
 
 .keypad-container #clear {
