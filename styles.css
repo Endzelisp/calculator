@@ -14,7 +14,7 @@
 
 .main-container {
   display: grid;
-  grid-template-columns: auto minmax(370px, 50vw) auto;
+  grid-template-columns: auto minmax(350px, 40vw) auto;
   grid-template-rows: auto 80vh auto;
   height: 100vh;
 }
