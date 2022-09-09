@@ -12,7 +12,7 @@ function isNumber (num) {
 }
 
 
-let currentStringValue = ''
+let currentStringValue = '0'
 
 // Event listeners
 
@@ -20,8 +20,15 @@ addEventListener('pointerdown', (e) => {
   let target = e.target;
 
   if (isNumber(target.textContent) && target.nodeName === 'BUTTON') {
-    currentStringValue += target.textContent;
-    display.textContent = currentStringValue;
+    if (currentStringValue === '0' && target.textContent !== '0') {
+      currentStringValue = target.textContent;
+      display.textContent = currentStringValue;
+    } else if (target.textContent === '0' && currentStringValue === '0') {
+      currentStringValue = '0'
+    } else {
+        currentStringValue += target.textContent;
+        display.textContent = currentStringValue;
+    }
   }
 })
 
