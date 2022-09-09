@@ -1,5 +1,6 @@
 const display = document.querySelector('.display-container #display');
 const decimal = document.querySelector('.keypad-container #decimal');
+const addBtn = document.querySelector('.keypad-container #add');
 
 
 
@@ -11,6 +12,11 @@ function isNumber (num) {
   sequence = new RegExp(/[0-9]/g);
   return sequence.test(num);
 }
+
+function add (numOne, numtwo) {
+  let result = numOne + numtwo;
+  return toString(result)
+};
 
 let decimalActive = false;
 let currentStringValue = '0';
