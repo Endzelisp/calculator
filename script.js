@@ -1,4 +1,5 @@
-const display = document.querySelector('.display-container #display')
+const display = document.querySelector('.display-container #display');
+const decimal = document.querySelector('.keypad-container #decimal');
 
 
 
@@ -11,7 +12,7 @@ function isNumber (num) {
   return sequence.test(num)
 }
 
-
+let decimalActive = false;
 let currentStringValue = '0'
 
 // Event listeners
@@ -32,11 +33,24 @@ addEventListener('pointerdown', (e) => {
   }
 })
 
+decimal.addEventListener('pointerdown', () => {
+  if (currentStringValue === '0' && decimalActive === false) {
+    currentStringValue = '0.';
+    display.textContent = currentStringValue;
+    decimalActive = true;
+  } else if (currentStringValue !== '0' && decimalActive === false) {
+      currentStringValue += '.';
+      display.textContent = currentStringValue;
+      decimalActive = true;
+  }
+})
+
 addEventListener('pointerdown', (e) => {
   let target = e.target;
 
   if (target.id === 'clear' && target.nodeName === 'BUTTON') {
     display.textContent = 0;
-    currentStringValue = ''
+    currentStringValue = '0'
+    decimalActive = false;
   }
 })
