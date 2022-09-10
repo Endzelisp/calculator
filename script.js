@@ -1,6 +1,7 @@
 const display = document.querySelector('.display-container #display');
 const decimal = document.querySelector('.keypad-container #decimal');
 const addBtn = document.querySelector('.keypad-container #add');
+const backspace = document.querySelector('.keypad-container #backspace')
 
 
 
@@ -55,8 +56,18 @@ addEventListener('pointerdown', (e) => {
   let target = e.target;
 
   if (target.id === 'clear' && target.nodeName === 'BUTTON') {
-    display.textContent = 0;
+    display.textContent = '0';
     currentStringValue = '0';
     decimalActive = false;
   };
 });
+
+backspace.addEventListener('pointerdown', () => {
+  if (currentStringValue.length === 1) {
+    currentStringValue = '0'
+    display.textContent = currentStringValue;
+  } else if (currentStringValue !== '0') {
+      currentStringValue = currentStringValue.slice(0, -1);
+      display.textContent = currentStringValue;
+  }
+})
