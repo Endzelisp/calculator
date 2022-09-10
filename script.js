@@ -1,5 +1,4 @@
 const display = document.querySelector('.display-container #display');
-const operatorSign = document.querySelector('.display-container #operator');
 const displayOperation = document.querySelector('.display-container #operation')
 const decimal = document.querySelector('.keypad-container #decimal');
 const backspace = document.querySelector('.keypad-container #backspace')
@@ -46,8 +45,7 @@ function operate (numOne, numtwo, operation) {
 
 function equal () {
   let result = operate(totalResult, currentInput, pendingOperation);
-  displayOperation.textContent = `${totalResult} ${operatorSign.textContent} ${currentInput}`
-  operatorSign.textContent = '';
+  displayOperation.textContent = `${totalResult} ${currentInput}`
   display.textContent = result;
   currentInput = result;
 }
@@ -96,7 +94,6 @@ clearAllBtn.addEventListener('pointerdown', () => {
   display.textContent = '0';
   currentInput = '0';
   totalResult = '0';
-  operatorSign.textContent = '';
   displayOperation.textContent = '';
   pendingOperation = null;
   decimalActive = false;
@@ -123,7 +120,6 @@ addEventListener('pointerdown', (e) => {
     totalResult = currentInput;
     currentInput = '0';
     pendingOperation = target.id;
-    operatorSign.textContent = target.textContent;
   }
 })
 
