@@ -16,8 +16,8 @@ function isNumber (num) {
 }
 
 function add (numOne, numtwo) {
-  let result = numOne + numtwo;
-  return toString(result)
+  let result = parseFloat(numOne) + parseFloat(numtwo);
+  return result.toString()
 };
 
 let decimalActive = false;
