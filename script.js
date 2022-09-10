@@ -7,7 +7,7 @@ const addBtn = document.querySelector('.keypad-container #add');
 const subtBtn = document.querySelector('.keypad-container #subt');
 const multBtn = document.querySelector('.keypad-container #mult');
 const divisionBtn = document.querySelector('.keypad-container #division');
-const equalBtn = document.querySelector('.keypad-container #equal')
+const equalBtn = document.querySelector('.keypad-container #equal');
 
 
 
@@ -78,5 +78,6 @@ backspace.addEventListener('pointerdown', () => {
 addBtn.addEventListener('pointerdown', () => {
   cacheStringValue = currentStringValue;
   currentStringValue = '0';
-  pendingOperation = 'add'
+  pendingOperation = 'add';
+  operatorSign.textContent = '+';
 })
