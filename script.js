@@ -24,10 +24,23 @@ function subt (numOne, numtwo) {
   return result.toString()
 }
 
+function mult (numOne, numtwo) {
+  let result = parseFloat(numOne) * parseFloat(numtwo);
+  return result.toString()
+}
+
+function division (numOne, numtwo) {
+  if (numtwo === '0') return 'Division by zero is not allowed'
+  let result = parseFloat(numOne) / parseFloat(numtwo);
+  return result.toString()
+}
+
 function operate (numOne, numtwo, operation) {
   switch (operation) {
     case 'add' : return add(numOne, numtwo);
     case 'subt' : return subt(numOne, numtwo);
+    case 'mult' : return mult(numOne, numtwo);
+    case 'division' : return division(numOne, numtwo);
   }
 }
 
