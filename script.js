@@ -43,16 +43,12 @@ function operate (numOne, numtwo, operation) {
   }
 }
 
-function equal () {
-  let result = operate(totalResult, currentInput, pendingOperation);
-  displayOperation.textContent = `${totalResult} ${currentInput}`
-  display.textContent = result;
-  currentInput = result;
-}
 
 let decimalActive = false;
 let currentInput = '0';
+let previousInput = null;
 let totalResult = '0';
+let currentSign;
 let pendingOperation;
 
 
@@ -91,12 +87,10 @@ decimal.addEventListener('pointerdown', () => {
 clearAllBtn.addEventListener('pointerdown', () => {
 // Restore all values to their original state
 
-  display.textContent = '0';
   currentInput = '0';
-  totalResult = '0';
-  displayOperation.textContent = '';
-  pendingOperation = null;
   decimalActive = false;
+  display.textContent = '0';
+  displayOperation.textContent = '';
 });
 
 backspace.addEventListener('pointerdown', () => {
@@ -117,9 +111,8 @@ addEventListener('pointerdown', (e) => {
   target = e.target;
 
   if (['add', 'subt', 'mult', 'division'].includes(target.id)) {
-    totalResult = currentInput;
-    currentInput = '0';
-    pendingOperation = target.id;
+    console.log('hello')
+
   }
 })
 
