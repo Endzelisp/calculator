@@ -44,6 +44,14 @@ function operate (numOne, numtwo, operation) {
   }
 }
 
+function equal () {
+  let result = operate(cacheStringValue, currentStringValue, pendingOperation);
+  displayOperation.textContent = `${cacheStringValue} ${operatorSign.textContent} ${currentStringValue}`
+  operatorSign.textContent = '';
+  display.textContent = result;
+  currentStringValue = result;
+}
+
 let decimalActive = false;
 let currentStringValue = '0';
 let cacheStringValue = '0';
@@ -110,10 +118,4 @@ addEventListener('pointerdown', (e) => {
   }
 })
 
-equalBtn.addEventListener('pointerdown', () => {
-  let result = operate(cacheStringValue, currentStringValue, pendingOperation);
-  displayOperation.textContent = `${cacheStringValue} ${operatorSign.textContent} ${currentStringValue}`
-  operatorSign.textContent = '';
-  display.textContent = result;
-  currentStringValue = result;
-})
+equalBtn.addEventListener('pointerdown', equal)
