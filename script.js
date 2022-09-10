@@ -1,4 +1,5 @@
 const display = document.querySelector('.display-container #display');
+const operatorSign = document.querySelector('.display-container #operator')
 const decimal = document.querySelector('.keypad-container #decimal');
 const backspace = document.querySelector('.keypad-container #backspace')
 const clearAllBtn = document.querySelector('.keypad-container #clear')
