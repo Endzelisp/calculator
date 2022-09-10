@@ -25,6 +25,7 @@ function add (numOne, numtwo) {
 
 let decimalActive = false;
 let currentStringValue = '0';
+let cacheStringValue = '0';
 
 // Event listeners
 
