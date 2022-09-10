@@ -67,6 +67,10 @@ decimal.addEventListener('pointerdown', () => {
 clearAllBtn.addEventListener('pointerdown', () => {
   display.textContent = '0';
   currentStringValue = '0';
+  cacheStringValue = '0';
+  operatorSign.textContent = '';
+  displayOperation.textContent = '';
+  pendingOperation = null;
   decimalActive = false;
 });
 
