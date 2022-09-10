@@ -10,11 +10,9 @@ const divisionBtn = document.querySelector('.keypad-container #division');
 const equalBtn = document.querySelector('.keypad-container #equal');
 
 
-
-// isNumber capture a string and compare it against a regular expression
-// to determine if it is a number between the valid range
-
 function isNumber (num) {
+/* isNumber filter e.target to just capture numeric keypad*/
+
   sequence = new RegExp(/[0-9]/g);
   return sequence.test(num);
 }
