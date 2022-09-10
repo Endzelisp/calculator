@@ -19,9 +19,15 @@ function add (numOne, numtwo) {
   return result.toString()
 };
 
+function subt (numOne, numtwo) {
+  let result = parseFloat(numOne) - parseFloat(numtwo);
+  return result.toString()
+}
+
 function operate (numOne, numtwo, operation) {
   switch (operation) {
-    case 'add' : return add(numOne, numtwo)
+    case 'add' : return add(numOne, numtwo);
+    case 'subt' : return subt(numOne, numtwo);
   }
 }
 
