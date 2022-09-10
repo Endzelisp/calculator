@@ -1,5 +1,6 @@
 const display = document.querySelector('.display-container #display');
-const operatorSign = document.querySelector('.display-container #operator')
+const operatorSign = document.querySelector('.display-container #operator');
+const displayOperation = document.querySelector('.display-container #operation')
 const decimal = document.querySelector('.keypad-container #decimal');
 const backspace = document.querySelector('.keypad-container #backspace')
 const clearAllBtn = document.querySelector('.keypad-container #clear')
@@ -88,6 +89,7 @@ addBtn.addEventListener('pointerdown', () => {
 
 equalBtn.addEventListener('pointerdown', () => {
   let result = operate(cacheStringValue, currentStringValue, pendingOperation);
+  displayOperation.textContent = `${cacheStringValue} ${operatorSign.textContent} ${currentStringValue}`
   operatorSign.textContent = '';
   display.textContent = result;
   currentStringValue = result;
