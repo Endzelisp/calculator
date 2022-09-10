@@ -24,6 +24,12 @@ function add (numOne, numtwo) {
   return result.toString()
 };
 
+function operate (numOne, numtwo, operation) {
+  switch (operation) {
+    case 'add' : return add(numOne, numtwo)
+  }
+}
+
 let decimalActive = false;
 let currentStringValue = '0';
 let cacheStringValue = '0';
@@ -80,4 +86,11 @@ addBtn.addEventListener('pointerdown', () => {
   currentStringValue = '0';
   pendingOperation = 'add';
   operatorSign.textContent = '+';
+})
+
+equalBtn.addEventListener('pointerdown', () => {
+  let result = operate(cacheStringValue, currentStringValue, pendingOperation);
+  operatorSign.textContent = '';
+  display.textContent = result;
+  currentStringValue = result;
 })
