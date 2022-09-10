@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
 
 *,
 *::before,
@@ -50,6 +51,7 @@
 #display {
   color: var(--calc-num-color);
   font-size: 2rem;
+  font-family: 'Play', sans-serif;
   overflow: hidden;
 }
 
