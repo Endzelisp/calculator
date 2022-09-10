@@ -1,9 +1,12 @@
 const display = document.querySelector('.display-container #display');
 const decimal = document.querySelector('.keypad-container #decimal');
-const addBtn = document.querySelector('.keypad-container #add');
 const backspace = document.querySelector('.keypad-container #backspace')
 const clearAllBtn = document.querySelector('.keypad-container #clear')
-
+const addBtn = document.querySelector('.keypad-container #add');
+const subtBtn = document.querySelector('.keypad-container #subt');
+const multBtn = document.querySelector('.keypad-container #mult');
+const divisionBtn = document.querySelector('.keypad-container #division');
+const equalBtn = document.querySelector('.keypad-container #equal')
 
 
 
