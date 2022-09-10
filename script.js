@@ -4,10 +4,6 @@ const displayOperation = document.querySelector('.display-container #operation')
 const decimal = document.querySelector('.keypad-container #decimal');
 const backspace = document.querySelector('.keypad-container #backspace')
 const clearAllBtn = document.querySelector('.keypad-container #clear')
-const addBtn = document.querySelector('.keypad-container #add');
-const subtBtn = document.querySelector('.keypad-container #subt');
-const multBtn = document.querySelector('.keypad-container #mult');
-const divisionBtn = document.querySelector('.keypad-container #division');
 const equalBtn = document.querySelector('.keypad-container #equal');
 
 
@@ -84,11 +80,15 @@ backspace.addEventListener('pointerdown', () => {
   }
 })
 
-addBtn.addEventListener('pointerdown', () => {
-  cacheStringValue = currentStringValue;
-  currentStringValue = '0';
-  pendingOperation = 'add';
-  operatorSign.textContent = '+';
+addEventListener('pointerdown', (e) => {
+  target = e.target;
+
+  if (['add', 'subt', 'mult', 'division'].includes(target.id)) {
+    cacheStringValue = currentStringValue;
+    currentStringValue = '0';
+    pendingOperation = target.id;
+    operatorSign.textContent = target.textContent;
+  }
 })
 
 equalBtn.addEventListener('pointerdown', () => {
