@@ -45,16 +45,16 @@ function operate (numOne, numtwo, operation) {
 }
 
 function equal () {
-  let result = operate(cacheStringValue, currentStringValue, pendingOperation);
-  displayOperation.textContent = `${cacheStringValue} ${operatorSign.textContent} ${currentStringValue}`
+  let result = operate(totalResult, currentInput, pendingOperation);
+  displayOperation.textContent = `${totalResult} ${operatorSign.textContent} ${currentInput}`
   operatorSign.textContent = '';
   display.textContent = result;
-  currentStringValue = result;
+  currentInput = result;
 }
 
 let decimalActive = false;
-let currentStringValue = '0';
-let cacheStringValue = '0';
+let currentInput = '0';
+let totalResult = '0';
 let pendingOperation;
 
 // Event listeners
@@ -63,34 +63,34 @@ addEventListener('pointerdown', (e) => {
   let target = e.target;
 
   if (isNumber(target.textContent) && target.nodeName === 'BUTTON') {
-    if (currentStringValue === '0' && target.textContent !== '0') {
-      currentStringValue = target.textContent;
-      display.textContent = currentStringValue;
-    } else if (target.textContent === '0' && currentStringValue === '0') {
-      currentStringValue = '0';
+    if (currentInput === '0' && target.textContent !== '0') {
+      currentInput = target.textContent;
+      display.textContent = currentInput;
+    } else if (target.textContent === '0' && currentInput === '0') {
+      currentInput = '0';
     } else {
-        currentStringValue += target.textContent;
-        display.textContent = currentStringValue;
+        currentInput += target.textContent;
+        display.textContent = currentInput;
     };
   };
 });
 
 decimal.addEventListener('pointerdown', () => {
-  if (currentStringValue === '0' && decimalActive === false) {
-    currentStringValue = '0.';
-    display.textContent = currentStringValue;
+  if (currentInput === '0' && decimalActive === false) {
+    currentInput = '0.';
+    display.textContent = currentInput;
     decimalActive = true;
-  } else if (currentStringValue !== '0' && decimalActive === false) {
-      currentStringValue += '.';
-      display.textContent = currentStringValue;
+  } else if (currentInput !== '0' && decimalActive === false) {
+      currentInput += '.';
+      display.textContent = currentInput;
       decimalActive = true;
   };
 });
 
 clearAllBtn.addEventListener('pointerdown', () => {
   display.textContent = '0';
-  currentStringValue = '0';
-  cacheStringValue = '0';
+  currentInput = '0';
+  totalResult = '0';
   operatorSign.textContent = '';
   displayOperation.textContent = '';
   pendingOperation = null;
@@ -98,12 +98,12 @@ clearAllBtn.addEventListener('pointerdown', () => {
 });
 
 backspace.addEventListener('pointerdown', () => {
-  if (currentStringValue.length === 1) {
-    currentStringValue = '0'
-    display.textContent = currentStringValue;
-  } else if (currentStringValue !== '0') {
-      currentStringValue = currentStringValue.slice(0, -1);
-      display.textContent = currentStringValue;
+  if (currentInput.length === 1) {
+    currentInput = '0'
+    display.textContent = currentInput;
+  } else if (currentInput !== '0') {
+      currentInput = currentInput.slice(0, -1);
+      display.textContent = currentInput;
   }
 })
 
@@ -111,8 +111,8 @@ addEventListener('pointerdown', (e) => {
   target = e.target;
 
   if (['add', 'subt', 'mult', 'division'].includes(target.id)) {
-    cacheStringValue = currentStringValue;
-    currentStringValue = '0';
+    totalResult = currentInput;
+    currentInput = '0';
     pendingOperation = target.id;
     operatorSign.textContent = target.textContent;
   }
