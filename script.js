@@ -26,6 +26,7 @@ function add (numOne, numtwo) {
 let decimalActive = false;
 let currentStringValue = '0';
 let cacheStringValue = '0';
+let pendingOperation;
 
 // Event listeners
 
@@ -71,4 +72,10 @@ backspace.addEventListener('pointerdown', () => {
       currentStringValue = currentStringValue.slice(0, -1);
       display.textContent = currentStringValue;
   }
+})
+
+addBtn.addEventListener('pointerdown', () => {
+  cacheStringValue = currentStringValue;
+  currentStringValue = '0';
+  pendingOperation = 'add'
 })
