@@ -57,11 +57,12 @@ let currentInput = '0';
 let totalResult = '0';
 let pendingOperation;
 
-// Event listeners
+
 
 addEventListener('pointerdown', (e) => {
-  let target = e.target;
+// Event listener to capture pressed keypad numbers
 
+  let target = e.target;
   if (isNumber(target.textContent) && target.nodeName === 'BUTTON') {
     if (currentInput === '0' && target.textContent !== '0') {
       currentInput = target.textContent;
@@ -76,6 +77,8 @@ addEventListener('pointerdown', (e) => {
 });
 
 decimal.addEventListener('pointerdown', () => {
+// Add decimal point
+
   if (currentInput === '0' && decimalActive === false) {
     currentInput = '0.';
     display.textContent = currentInput;
@@ -88,6 +91,8 @@ decimal.addEventListener('pointerdown', () => {
 });
 
 clearAllBtn.addEventListener('pointerdown', () => {
+// Restore all values to their original state
+
   display.textContent = '0';
   currentInput = '0';
   totalResult = '0';
@@ -98,6 +103,8 @@ clearAllBtn.addEventListener('pointerdown', () => {
 });
 
 backspace.addEventListener('pointerdown', () => {
+// Delete the last number of the current input
+
   if (currentInput.length === 1) {
     currentInput = '0'
     display.textContent = currentInput;
@@ -108,6 +115,8 @@ backspace.addEventListener('pointerdown', () => {
 })
 
 addEventListener('pointerdown', (e) => {
+// Fire up one of the math operations
+
   target = e.target;
 
   if (['add', 'subt', 'mult', 'division'].includes(target.id)) {
