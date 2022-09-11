@@ -11,32 +11,32 @@ function isNumber (num) {
 
   sequence = new RegExp(/[0-9]/g);
   return sequence.test(num);
-}
+};
 
 function toFromNegative (num) {
-  return parseFloat(num) * -1
-}
+  return parseFloat(num) * -1;
+};
 
 function add (numOne, numtwo) {
   let result = parseFloat(numOne) + parseFloat(numtwo);
-  return result.toString()
+  return result.toString();
 };
 
 function subt (numOne, numtwo) {
   let result = parseFloat(numOne) - parseFloat(numtwo);
-  return result.toString()
+  return result.toString();
 }
 
 function mult (numOne, numtwo) {
   let result = parseFloat(numOne) * parseFloat(numtwo);
-  return result.toString()
-}
+  return result.toString();
+};
 
 function division (numOne, numtwo) {
-  if (numtwo === '0') return 'Division by zero is not allowed'
+  if (numtwo === '0') return 'Division by zero is not allowed';
   let result = parseFloat(numOne) / parseFloat(numtwo);
-  return result.toString()
-}
+  return result.toString();
+};
 
 function operate (operation) {
   switch (operation) {
@@ -44,8 +44,8 @@ function operate (operation) {
     case 'subt' : return subt;
     case 'mult' : return mult;
     case 'division' : return division;
-  }
-}
+  };
+};
 
 let decimalActive = false;
 let currentInput = '0';
@@ -107,7 +107,6 @@ clearAllBtn.addEventListener('pointerdown', () => {
   sign = '';
   keypadActive = false;
   pendingOperation = null;
-
 });
 
 backspaceBtn.addEventListener('pointerdown', () => {
@@ -119,11 +118,10 @@ backspaceBtn.addEventListener('pointerdown', () => {
     display.textContent = '0';
 
   } else if (currentInput !== '0') {
-    console.log('last digit ' + currentInput[currentInput.length - 1])
       currentInput = currentInput.slice(0, -1);
       display.textContent = currentInput;
-  }
-})
+  };
+});
 
 addEventListener('pointerdown', (e) => {
 // Fire up one of the math operations
@@ -136,8 +134,7 @@ addEventListener('pointerdown', (e) => {
       previousInput = currentInput;
       currentInput = '0';
       displayOperation.textContent = `${previousInput} ${target.textContent}`;
-      console.log('im here')
-    }
+    };
 
     if (previousInput !== null && pendingOperation === null) {
       pendingOperation = operate(target.id);
@@ -151,6 +148,6 @@ addEventListener('pointerdown', (e) => {
         currentInput = '0';
         pendingOperation = operate(target.id);
         sign = target.textContent;
-      }
-  }
-})
+      };
+  };
+});
