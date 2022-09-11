@@ -1,11 +1,10 @@
 const display = document.querySelector('.display-container #display');
 const displayOperation = document.querySelector('.display-container #operation')
-const decimal = document.querySelector('.keypad-container #decimal');
-const backspace = document.querySelector('.keypad-container #backspace');
+const decimalBtn = document.querySelector('.keypad-container #decimal');
+const backspaceBtn = document.querySelector('.keypad-container #backspace');
 const clearAllBtn = document.querySelector('.keypad-container #clear');
 const changeSignBtn = document.querySelector('.keypad-container #change-sign');
 const equalBtn = document.querySelector('.keypad-container #equal');
-
 
 function isNumber (num) {
 /* isNumber filter e.target to just capture numeric keypad*/
@@ -52,7 +51,6 @@ let decimalActive = false;
 let currentInput = '0';
 let previousInput = null;
 let totalResult = '0';
-let currentSign = null;
 let sign;
 let keypadActive = false;
 let pendingOperation = null;
@@ -82,7 +80,7 @@ changeSignBtn.addEventListener('pointerdown', () => {
   currentInput = changedSingNum;
 });
 
-decimal.addEventListener('pointerdown', () => {
+decimalBtn.addEventListener('pointerdown', () => {
 // Add decimal point
 
   if (currentInput === '0' && decimalActive === false) {
@@ -103,14 +101,16 @@ clearAllBtn.addEventListener('pointerdown', () => {
   currentInput = '0';
   previousInput = null;
   totalResult = '0';
-  currentSign = null;
   decimalActive = false;
   display.textContent = '0';
   displayOperation.textContent = '';
+  sign = '';
+  keypadActive = false;
+  pendingOperation = null;
 
 });
 
-backspace.addEventListener('pointerdown', () => {
+backspaceBtn.addEventListener('pointerdown', () => {
 // Delete the last number of the current input
 
   if (currentInput.length === 1) {
@@ -129,10 +129,7 @@ addEventListener('pointerdown', (e) => {
 // Fire up one of the math operations
 
   target = e.target;
-
   if (['add', 'subt', 'mult', 'division'].includes(target.id)) {
-    currentSign = target.textContent;
-
 
     if (previousInput === null && keypadActive === true) {
       keypadActive = false;
@@ -145,25 +142,15 @@ addEventListener('pointerdown', (e) => {
     if (previousInput !== null && pendingOperation === null) {
       pendingOperation = operate(target.id);
       sign = target.textContent;
-    }
-
-    else if (previousInput !== null && pendingOperation !== null) {
-      totalResult = pendingOperation(previousInput, currentInput);
-      displayOperation.textContent = `${previousInput} ${sign} 
-      ${(currentInput === '0' ? '' : currentInput)}`;
-      previousInput = totalResult;
-      display.textContent = `${totalResult}`;
-      currentInput = '0';
-      pendingOperation = operate(target.id);
-      sign = target.textContent;
-    }
-    
-/* console.log('keypad active ' + keypadActive)
-console.log('decimal active ' + decimalActive)
-console.log('current input ' + currentInput)
-console.log('previous input ' + previousInput)
-console.log('total result ' + totalResult)
-console.log('current sign ' + currentSign)
- */
+    } else if (previousInput !== null && pendingOperation !== null) {
+        totalResult = pendingOperation(previousInput, currentInput);
+        displayOperation.textContent = `${previousInput} ${sign} 
+        ${(currentInput === '0' ? '' : currentInput)}`;
+        previousInput = totalResult;
+        display.textContent = `${totalResult}`;
+        currentInput = '0';
+        pendingOperation = operate(target.id);
+        sign = target.textContent;
+      }
   }
 })
