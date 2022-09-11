@@ -1,8 +1,9 @@
 const display = document.querySelector('.display-container #display');
 const displayOperation = document.querySelector('.display-container #operation')
 const decimal = document.querySelector('.keypad-container #decimal');
-const backspace = document.querySelector('.keypad-container #backspace')
-const clearAllBtn = document.querySelector('.keypad-container #clear')
+const backspace = document.querySelector('.keypad-container #backspace');
+const clearAllBtn = document.querySelector('.keypad-container #clear');
+const changeSignBtn = document.querySelector('.keypad-container #change-sign');
 const equalBtn = document.querySelector('.keypad-container #equal');
 
 
@@ -73,6 +74,12 @@ addEventListener('pointerdown', (e) => {
         display.textContent = currentInput;
     };
   };
+});
+
+changeSignBtn.addEventListener('pointerdown', () => {
+  let changedSingNum = toFromNegative(currentInput);
+  display.textContent = changedSingNum;
+  currentInput = changedSingNum;
 });
 
 decimal.addEventListener('pointerdown', () => {

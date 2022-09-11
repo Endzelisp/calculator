@@ -61,7 +61,7 @@
   grid-template-areas: "seven eight nine division backspace"
                        "four five six mult clear"
                        "one two three subs equal"
-                       "zero zero decimal add equal";
+                       "zero chage-sign decimal add equal";
   gap: 10px;
   width: 100%;
   height: 70%;
