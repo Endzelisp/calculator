@@ -13,6 +13,10 @@ function isNumber (num) {
   return sequence.test(num);
 }
 
+function toFromNegative (num) {
+  return parseFloat(num) * -1
+}
+
 function add (numOne, numtwo) {
   let result = parseFloat(numOne) + parseFloat(numtwo);
   return result.toString()
@@ -146,16 +150,13 @@ addEventListener('pointerdown', (e) => {
       pendingOperation = operate(target.id);
       sign = target.textContent;
     }
-
-
-
-
-console.log('keypad active ' + keypadActive)
+    
+/* console.log('keypad active ' + keypadActive)
 console.log('decimal active ' + decimalActive)
 console.log('current input ' + currentInput)
 console.log('previous input ' + previousInput)
 console.log('total result ' + totalResult)
 console.log('current sign ' + currentSign)
-
+ */
   }
 })
