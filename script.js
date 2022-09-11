@@ -123,6 +123,16 @@ backspaceBtn.addEventListener('pointerdown', () => {
   };
 });
 
+equalBtn.addEventListener('pointerdown', () => {
+  totalResult = pendingOperation(previousInput, currentInput);
+  display.textContent = totalResult;
+  displayOperation.textContent = `${previousInput} ${sign} 
+        ${(currentInput === '0' ? '' : currentInput)}`;
+  previousInput = totalResult;
+  currentInput = '0';
+  pendingOperation = null;
+})
+
 addEventListener('pointerdown', (e) => {
 // Fire up one of the math operations
 
@@ -144,7 +154,7 @@ addEventListener('pointerdown', (e) => {
         displayOperation.textContent = `${previousInput} ${sign} 
         ${(currentInput === '0' ? '' : currentInput)}`;
         previousInput = totalResult;
-        display.textContent = `${totalResult}`;
+        display.textContent = totalResult;
         currentInput = '0';
         pendingOperation = operate(target.id);
         sign = target.textContent;
