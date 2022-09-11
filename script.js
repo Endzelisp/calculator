@@ -34,35 +34,36 @@ function division (numOne, numtwo) {
   return result.toString()
 }
 
-function operate (numOne, numtwo, operation) {
+function operate (operation) {
   switch (operation) {
-    case 'add' : return add(numOne, numtwo);
-    case 'subt' : return subt(numOne, numtwo);
-    case 'mult' : return mult(numOne, numtwo);
-    case 'division' : return division(numOne, numtwo);
+    case 'add' : return add;
+    case 'subt' : return subt;
+    case 'mult' : return mult;
+    case 'division' : return division;
   }
 }
-
 
 let decimalActive = false;
 let currentInput = '0';
 let previousInput = null;
 let totalResult = '0';
-let currentSign;
-let pendingOperation;
-
-
+let currentSign = null;
+let sign;
+let keypadActive = false;
+let pendingOperation = null;
 
 addEventListener('pointerdown', (e) => {
 // Event listener to capture pressed keypad numbers
 
   let target = e.target;
   if (isNumber(target.textContent) && target.nodeName === 'BUTTON') {
+    keypadActive = true;
+
     if (currentInput === '0' && target.textContent !== '0') {
       currentInput = target.textContent;
       display.textContent = currentInput;
     } else if (target.textContent === '0' && currentInput === '0') {
-      currentInput = '0';
+      return
     } else {
         currentInput += target.textContent;
         display.textContent = currentInput;
@@ -77,6 +78,7 @@ decimal.addEventListener('pointerdown', () => {
     currentInput = '0.';
     display.textContent = currentInput;
     decimalActive = true;
+
   } else if (currentInput !== '0' && decimalActive === false) {
       currentInput += '.';
       display.textContent = currentInput;
@@ -88,18 +90,25 @@ clearAllBtn.addEventListener('pointerdown', () => {
 // Restore all values to their original state
 
   currentInput = '0';
+  previousInput = null;
+  totalResult = '0';
+  currentSign = null;
   decimalActive = false;
   display.textContent = '0';
   displayOperation.textContent = '';
+
 });
 
 backspace.addEventListener('pointerdown', () => {
 // Delete the last number of the current input
 
   if (currentInput.length === 1) {
-    currentInput = '0'
-    display.textContent = currentInput;
+    currentInput = '0';
+    decimalActive = false;
+    display.textContent = '0';
+
   } else if (currentInput !== '0') {
+    console.log('last digit ' + currentInput[currentInput.length - 1])
       currentInput = currentInput.slice(0, -1);
       display.textContent = currentInput;
   }
@@ -111,9 +120,42 @@ addEventListener('pointerdown', (e) => {
   target = e.target;
 
   if (['add', 'subt', 'mult', 'division'].includes(target.id)) {
-    console.log('hello')
+    currentSign = target.textContent;
+
+
+    if (previousInput === null && keypadActive === true) {
+      keypadActive = false;
+      previousInput = currentInput;
+      currentInput = '0';
+      displayOperation.textContent = `${previousInput} ${target.textContent}`;
+      console.log('im here')
+    }
+
+    if (previousInput !== null && pendingOperation === null) {
+      pendingOperation = operate(target.id);
+      sign = target.textContent;
+    }
+
+    else if (previousInput !== null && pendingOperation !== null) {
+      totalResult = pendingOperation(previousInput, currentInput);
+      displayOperation.textContent = `${previousInput} ${sign} 
+      ${(currentInput === '0' ? '' : currentInput)}`;
+      previousInput = totalResult;
+      display.textContent = `${totalResult}`;
+      currentInput = '0';
+      pendingOperation = operate(target.id);
+      sign = target.textContent;
+    }
+
+
+
+
+console.log('keypad active ' + keypadActive)
+console.log('decimal active ' + decimalActive)
+console.log('current input ' + currentInput)
+console.log('previous input ' + previousInput)
+console.log('total result ' + totalResult)
+console.log('current sign ' + currentSign)
 
   }
 })
-
-equalBtn.addEventListener('pointerdown', equal)
