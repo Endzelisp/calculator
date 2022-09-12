@@ -128,6 +128,7 @@ backspaceBtn.addEventListener('pointerdown', () => {
     display.textContent = '0';
 
   } else if (currentInput !== '0') {
+      if (currentInput[currentInput.length - 1] === '.') decimalActive = false;
       currentInput = currentInput.slice(0, -1);
       display.textContent = currentInput;
   };
