@@ -17,8 +17,8 @@
 
 .main-container {
   display: grid;
-  grid-template-columns: auto minmax(350px, 40vw) auto;
-  grid-template-rows: auto 80vh auto;
+  grid-template-columns: auto minmax(350px, 30vw) auto;
+  grid-template-rows: auto 80vh auto 10vh;
   height: 100vh;
 }
 
@@ -98,4 +98,23 @@
 
 .keypad-container #zero {
   grid-area: zero;
+}
+
+footer {
+  grid-column: 1/4;
+  grid-row: 4/5;
+  background-color: rgb(54, 54, 54);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer img {
+  height: 8vh;
+  width: 100%;
+}
+
+footer a {
+  text-decoration: none;
+  color: rgb(235, 235, 235);
 }
