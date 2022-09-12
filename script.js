@@ -55,24 +55,34 @@ let sign;
 let keypadActive = false;
 let pendingOperation = null;
 
-addEventListener('pointerdown', (e) => {
+function inputNumberKeypad (e) {
 // Event listener to capture pressed keypad numbers
 
-  let target = e.target;
-  if (isNumber(target.textContent) && target.nodeName === 'BUTTON') {
-    keypadActive = true;
+  let target;
 
-    if (currentInput === '0' && target.textContent !== '0') {
-      currentInput = target.textContent;
+  if (e.type === 'pointerdown') {
+    target = e.target;
+    target = target.textContent;
+  } else if (e.type === 'keypress') {
+    target = e.key;
+  };
+
+  if (isNumber(target)) {
+    keypadActive = true;
+    if (currentInput === '0' && target !== '0') {
+      currentInput = target;
       display.textContent = currentInput;
-    } else if (target.textContent === '0' && currentInput === '0') {
+    } else if (target === '0' && currentInput === '0') {
       return
     } else {
-        currentInput += target.textContent;
+        currentInput += target;
         display.textContent = currentInput;
     };
   };
-});
+}
+
+addEventListener('pointerdown', (e) => inputNumberKeypad(e));
+addEventListener('keypress', (e) => inputNumberKeypad(e))
 
 changeSignBtn.addEventListener('pointerdown', () => {
   let changedSingNum = toFromNegative(currentInput);
