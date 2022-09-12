@@ -8,7 +8,7 @@ const equalBtn = document.querySelector('.keypad-container #equal');
 
 function isNumber (num) {
 /* isNumber filter e.target to just capture numeric keypad*/
-
+  if (num.length > 1) return false;
   sequence = new RegExp(/[0-9]/g);
   return sequence.test(num);
 };
@@ -59,7 +59,6 @@ function inputNumberKeypad (e) {
 // Event listener to capture pressed keypad numbers
 
   let target;
-
   if (e.type === 'pointerdown') {
     target = e.target;
     target = target.textContent;
