@@ -72,8 +72,9 @@
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background-color: rgb(184, 184, 184);
-  border: 3px solid rgb(66, 66, 66);
+ background: rgb(184,184,184);
+background: linear-gradient(328deg, rgba(184,184,184,1) 0%, rgba(68,67,67,1) 23%); 
+  border: 3px solid  linear-gradient(328deg, rgba(184,184,184,1) 0%, rgba(68,67,67,1) 13%); ;
   font-size: 2rem;
   font-weight: 700;
 }

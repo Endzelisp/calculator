@@ -148,11 +148,17 @@ function solveOperation (operation) {
     pendingOperation = operate(operation);
     sign = operation;
     decimalActive = false;
-  } else if (previousInput !== null && pendingOperation !== null) {
+    displayOperation.textContent = `${previousInput} ${operation}`;
+    keypadActive = false;
+  } else if (previousInput !== null && pendingOperation !== null && keypadActive === false) {
+      pendingOperation = operate(operation);
+      sign = operation;
+      displayOperation.textContent = `${previousInput} ${operation}`;
+    }  
+  else if (previousInput !== null && pendingOperation !== null && keypadActive === true) {
       totalResult = pendingOperation(previousInput, currentInput);
-      displayOperation.textContent = `${previousInput} ${sign} 
-      ${(currentInput === '0' ? '' : currentInput)}`;
       previousInput = totalResult;
+      displayOperation.textContent = `${previousInput} ${operation}`;
       display.textContent = totalResult;
       currentInput = '0';
       pendingOperation = operate(operation);
