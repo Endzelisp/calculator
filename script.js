@@ -40,10 +40,10 @@ function division (numOne, numtwo) {
 
 function operate (operation) {
   switch (operation) {
-    case 'add' : return add;
-    case 'subt' : return subt;
-    case 'mult' : return mult;
-    case 'division' : return division;
+    case '+' : return add;
+    case '-' : return subt;
+    case '*' : return mult;
+    case '/' : return division;
   };
 };
 
@@ -80,16 +80,7 @@ function inputNumberKeypad (e) {
   };
 }
 
-addEventListener('pointerdown', (e) => inputNumberKeypad(e));
-addEventListener('keypress', (e) => inputNumberKeypad(e))
-
-changeSignBtn.addEventListener('pointerdown', () => {
-  let changedSingNum = toFromNegative(currentInput);
-  display.textContent = changedSingNum;
-  currentInput = changedSingNum;
-});
-
-decimalBtn.addEventListener('pointerdown', () => {
+function setDecimalPoint () {
 // Add decimal point
 
   if (currentInput === '0' && decimalActive === false) {
@@ -102,9 +93,9 @@ decimalBtn.addEventListener('pointerdown', () => {
       display.textContent = currentInput;
       decimalActive = true;
   };
-});
+}
 
-clearAllBtn.addEventListener('pointerdown', () => {
+function clearAll () {
 // Restore all values to their original state
 
   currentInput = '0';
@@ -116,9 +107,9 @@ clearAllBtn.addEventListener('pointerdown', () => {
   sign = '';
   keypadActive = false;
   pendingOperation = null;
-});
+}
 
-backspaceBtn.addEventListener('pointerdown', () => {
+function deleteLastInput () {
 // Delete the last number of the current input
 
   if (currentInput.length === 1) {
@@ -131,9 +122,11 @@ backspaceBtn.addEventListener('pointerdown', () => {
       currentInput = currentInput.slice(0, -1);
       display.textContent = currentInput;
   };
-});
+}
 
-equalBtn.addEventListener('pointerdown', () => {
+function getTotal () {
+//To be used with the = button or Enter key
+
   totalResult = pendingOperation(previousInput, currentInput);
   display.textContent = totalResult;
   displayOperation.textContent = `${previousInput} ${sign} 
@@ -141,33 +134,82 @@ equalBtn.addEventListener('pointerdown', () => {
   previousInput = totalResult;
   currentInput = '0';
   pendingOperation = null;
+}
+
+function solveOperation (operation) {
+  if (previousInput === null && keypadActive === true) {
+    keypadActive = false;
+    previousInput = currentInput;
+    currentInput = '0';
+    displayOperation.textContent = `${previousInput} ${operation}`;
+  };
+
+  if (previousInput !== null && pendingOperation === null) {
+    pendingOperation = operate(operation);
+    sign = operation;
+    decimalActive = false;
+  } else if (previousInput !== null && pendingOperation !== null) {
+      totalResult = pendingOperation(previousInput, currentInput);
+      displayOperation.textContent = `${previousInput} ${sign} 
+      ${(currentInput === '0' ? '' : currentInput)}`;
+      previousInput = totalResult;
+      display.textContent = totalResult;
+      currentInput = '0';
+      pendingOperation = operate(operation);
+      sign = operation;
+      decimalActive = false;
+    };
+}
+
+addEventListener('pointerdown', (e) => inputNumberKeypad(e));
+addEventListener('keypress', (e) => inputNumberKeypad(e))
+
+changeSignBtn.addEventListener('pointerdown', () => {
+  let changedSingNum = toFromNegative(currentInput);
+  display.textContent = changedSingNum;
+  currentInput = changedSingNum;
+});
+
+decimalBtn.addEventListener('pointerdown', setDecimalPoint);
+addEventListener('keypress', (e) => {
+  if (e.key === '.') setDecimalPoint();
+});
+
+clearAllBtn.addEventListener('pointerdown', clearAll);
+addEventListener('keydown', (e) => {
+  if (e.key === 'Delete' || e.key === 'Escape') {
+    clearAll()
+  }
+})
+
+backspaceBtn.addEventListener('pointerdown', deleteLastInput);
+addEventListener('keydown', (e) => {
+  if (e.key === 'Backspace') {
+    deleteLastInput()
+  }
+})
+
+equalBtn.addEventListener('pointerdown', getTotal);
+addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    getTotal()
+  }
 })
 
 addEventListener('pointerdown', (e) => {
 // Fire up one of the math operations
 
-  target = e.target;
-  if (['add', 'subt', 'mult', 'division'].includes(target.id)) {
-
-    if (previousInput === null && keypadActive === true) {
-      keypadActive = false;
-      previousInput = currentInput;
-      currentInput = '0';
-      displayOperation.textContent = `${previousInput} ${target.textContent}`;
-    };
-
-    if (previousInput !== null && pendingOperation === null) {
-      pendingOperation = operate(target.id);
-      sign = target.textContent;
-    } else if (previousInput !== null && pendingOperation !== null) {
-        totalResult = pendingOperation(previousInput, currentInput);
-        displayOperation.textContent = `${previousInput} ${sign} 
-        ${(currentInput === '0' ? '' : currentInput)}`;
-        previousInput = totalResult;
-        display.textContent = totalResult;
-        currentInput = '0';
-        pendingOperation = operate(target.id);
-        sign = target.textContent;
-      };
+  let target = e.target;
+  let operation = target.textContent;
+  if (['+', '-', '*', '/'].includes(operation)) {
+    solveOperation(operation)
   };
 });
+
+addEventListener('keypress', (e) => {
+  let operation = e.key;
+
+  if (['+', '-', '*', '/'].includes(operation)) {
+    solveOperation(operation)
+  };
+})
