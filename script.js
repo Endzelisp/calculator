@@ -33,7 +33,7 @@ function mult (numOne, numtwo) {
 };
 
 function division (numOne, numtwo) {
-  if (numtwo === '0') return 'Division by zero is not allowed';
+  if (numtwo === '0') return 'division by zero';
   let result = parseFloat(numOne) / parseFloat(numtwo);
   return result.toString();
 };
