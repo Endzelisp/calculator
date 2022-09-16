@@ -18,7 +18,7 @@
 .main-container {
   display: grid;
   grid-template-columns: auto minmax(350px, 30vw) auto;
-  grid-template-rows: auto 80vh auto 10vh;
+  grid-template-rows: auto 80vh 5vh auto;
   height: 100vh;
 }
 
@@ -109,29 +109,23 @@ footer {
   grid-row: 4/5;
   background-color: rgb(54, 54, 54);
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+footer > a {
+  min-width: 200px;
+  height: 8vh;
+  flex-grow: 1;
+  flex-basis: 0;
+  text-decoration: none;
+  color: rgb(235, 235, 235);
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 footer img {
   height: 8vh;
-  width: 100%;
-}
-
-footer a {
-  text-decoration: none;
-  color: rgb(235, 235, 235);
-}
-
-@media only screen and (max-width: 600px) {
-  .main-container {
-    grid-template-rows: 5vh 80vh 5vh auto;
-  }
-
-  footer {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-
+  width: auto;
 }
